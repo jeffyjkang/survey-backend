@@ -35,3 +35,9 @@ get surveys/:id, retreives a survey by id,
 }
 ]
 }
+
+questions post, creates question, must provide question string and existing surveys id to attach to survey
+{
+"question" : "test question",
+"surveysId" : 1
+}
