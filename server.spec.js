@@ -16,8 +16,8 @@ describe("server.js", () => {
   });
   // endpoint surveys
   //
-  // first entry 201 created status
   describe("surveys endpoint (/surveys)", () => {
+    // first entry 201 created status
     test("should return status 201", async () => {
       const expected = 201;
       const response = await request(server)
@@ -25,7 +25,7 @@ describe("server.js", () => {
         .send({ title: "testTitle", description: "testDescription" });
       expect(response.status).toEqual(expected);
     });
-    // duplicate entry , error
+    // duplicate entry , error title must be unique
     test("should return status 500", async () => {
       const expected = 500;
       const response = await request(server)
@@ -66,6 +66,34 @@ describe("server.js", () => {
     test("should return status 404", async () => {
       const expected = 404;
       const response = await request(server).get("/surveys/10000");
+      expect(response.status).toEqual(expected);
+    });
+  });
+  // endpoint questions
+  //
+  describe("questions endpoint (/questions)", () => {
+    // return status 201 created question
+    test("should return status code 201", async () => {
+      const expected = 201;
+      const response = await request(server)
+        .post("/questions")
+        .send({ question: "testQuestion", surveysId: 2 });
+      expect(response.status).toEqual(expected);
+    });
+    // should return status 400 when no question is given
+    test("should return status code 400", async () => {
+      const expected = 400;
+      const response = await request(server)
+        .post("/questions")
+        .send({ question: "", surveysId: 2 });
+      expect(response.status).toEqual(expected);
+    });
+    // should return status 400 when no surveysId is given
+    test("should return status code 400", async () => {
+      const expected = 400;
+      const response = await request(server)
+        .post("/questions")
+        .send({ question: "testQuestion1", surveysId: "" });
       expect(response.status).toEqual(expected);
     });
   });

@@ -25,10 +25,11 @@ router.get("/:id", async (req, res) => {
       res
         .status(404)
         .json({ error: "the survey with the specified id does not exist" });
+    } else {
+      const questions = await questionsDb.get().where("surveysId", id);
+      survey.questions = questions;
+      res.status(200).json(survey);
     }
-    const questions = await questionsDb.get().where("surveysId", id);
-    survey.questions = questions;
-    res.status(200).json(survey);
   } catch (error) {
     res.status(500).json({ error: "there was an error retrieving the survey" });
   }
