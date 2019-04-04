@@ -3,7 +3,6 @@ const router = express.Router();
 const questionsDb = require("../helpers/questionsDb");
 
 // get route
-
 router.get("/", async (req, res) => {
   try {
     const questions = await questionsDb.get();
@@ -15,8 +14,26 @@ router.get("/", async (req, res) => {
   }
 });
 
-// post route
+// get by id
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const question = await questionsDb.get(id);
+    if (!question) {
+      res
+        .status(404)
+        .json({ error: "the question with the specified id does not exist" });
+    } else {
+      res.status(200).json(question);
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "thre was an error retrieving the question" });
+  }
+});
 
+// post route
 router.post("/", async (req, res) => {
   const { question, surveysId } = req.body;
   if (!question) {
@@ -36,4 +53,5 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: "there was an error creating a question" });
   }
 });
+
 module.exports = router;

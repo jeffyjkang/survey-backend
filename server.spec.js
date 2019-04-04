@@ -2,12 +2,14 @@ const request = require("supertest");
 const { server } = require("./server");
 
 describe("server.js", () => {
+  // root endpoint, checks to make sure surver is up and running
   describe("root endpoint (/)", () => {
     test("should return server running", async () => {
       const expected = "<h1>Server Running<h1>";
       const response = await request(server).get("/");
       expect(response.text).toEqual(expected);
     });
+    // return type text
     test("should return type text", async () => {
       const expected = "text/html";
       const response = await request(server).get("/");
@@ -69,9 +71,28 @@ describe("server.js", () => {
       expect(response.status).toEqual(expected);
     });
   });
+  // retrieving the results of a survey by id
+  //retrun status 200, ok
+  test("should return status 200", async () => {
+    const expected = 200;
+    const response = await request(server).get("/surveys/results/1");
+    expect(response.status).toEqual(expected);
+  });
+  // return status 404, when id does not exist
+  test("should return status 404", async () => {
+    const expected = 404;
+    const response = await request(server).get("/surveys/1000");
+    expect(response.status).toEqual(expected);
+  });
   // endpoint questions
   //
   describe("questions endpoint (/questions)", () => {
+    // return status 200, ok
+    test("should return status code 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/questions");
+      expect(response.status).toEqual(expected);
+    });
     // return status 201 created question
     test("should return status code 201", async () => {
       const expected = 201;
@@ -100,6 +121,12 @@ describe("server.js", () => {
   // endpoint answers
   //
   describe("answers endpoint (/answers)", () => {
+    // return status 200, ok
+    test("should return status code 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/answers");
+      expect(response.status).toEqual(expected);
+    });
     // return status 201 created answer
     test("should return status code 201", async () => {
       const expected = 201;

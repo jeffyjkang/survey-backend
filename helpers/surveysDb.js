@@ -5,12 +5,11 @@ module.exports = {
   // get from db surveys table
   get: id => {
     let query = db(table);
+    // if id is passed return survey with specified id
     if (id) {
       query = db(table)
         .where("surveys.id", id)
         .first();
-      // .join("questions", "questions.surveysId", "=", "surveys.id")
-      // .then("surveys.questions", "=", "questions");
       return query;
     }
     return query;

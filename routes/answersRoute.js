@@ -3,7 +3,6 @@ const router = express.Router();
 const answersDb = require("../helpers/answersDb");
 
 // get route
-
 router.get("/", async (req, res) => {
   try {
     const answers = await answersDb.get();
@@ -16,7 +15,6 @@ router.get("/", async (req, res) => {
 });
 
 // post route
-
 router.post("/", async (req, res) => {
   const { yes, no, questionsId } = req.body;
   if (!questionsId) {
