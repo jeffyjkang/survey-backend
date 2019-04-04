@@ -41,3 +41,11 @@ questions post, creates question, must provide question string and existing surv
 "question" : "test question",
 "surveysId" : 1
 }
+
+answers post, creates answer, must provide existing questions id to attach to question,
+only possible input can be either 1 or 0, and only one field can be modified
+{
+"yes": 1,
+"no": 0,
+questionsId: 1
+}

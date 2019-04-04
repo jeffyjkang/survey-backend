@@ -116,5 +116,29 @@ describe("server.js", () => {
         .send({ yes: 0, no: 1, questionsId: "" });
       expect(response.status).toEqual(expected);
     });
+    // if field has integer value greater than 1
+    test("should return status 400", async () => {
+      const expected = 400;
+      const response = await request(server)
+        .post("/answers")
+        .send({ yes: 2, no: 0, questionsId: 1 });
+      expect(response.status).toEqual(expected);
+    });
+    // if fields has integer value greater than 1
+    test("should return status 400", async () => {
+      const expected = 400;
+      const response = await request(server)
+        .post("/answers")
+        .send({ yes: 0, no: 3, questionsId: 2 });
+      expect(response.status).toEqual(expected);
+    });
+    // if both fields have value of 1
+    test("should return status 400", async () => {
+      const expected = 400;
+      const response = await request(server)
+        .post("/answers")
+        .send({ yes: 1, no: 1, questionsId: 2 });
+      expect(response.status).toEqual(expected);
+    });
   });
 });

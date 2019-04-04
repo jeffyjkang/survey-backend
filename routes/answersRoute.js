@@ -24,6 +24,16 @@ router.post("/", async (req, res) => {
       .status(400)
       .json({ error: "questionsId is required to connect to questions" });
   }
+  if (yes > 1 || no > 1) {
+    return res
+      .status(400)
+      .json({ error: "answer can not be incremented by more than 1" });
+  }
+  if (yes === 1 && no === 1) {
+    return res
+      .status(400)
+      .json({ error: "answer can only have one field modified" });
+  }
   try {
     const answer = await answersDb.insert(req.body);
     res.status(201).json(answer);
