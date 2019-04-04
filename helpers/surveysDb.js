@@ -3,7 +3,18 @@ const table = "surveys";
 
 module.exports = {
   // get from db surveys table
-  get: () => db(table),
+  get: id => {
+    let query = db(table);
+    if (id) {
+      query = db(table)
+        .where("surveys.id", id)
+        .first();
+      // .join("questions", "questions.surveysId", "=", "surveys.id")
+      // .then("surveys.questions", "=", "questions");
+      return query;
+    }
+    return query;
+  },
   // insert single survey to db surveys table
   insert: survey => db(table).insert(survey),
   // update survey in surveys table by id
