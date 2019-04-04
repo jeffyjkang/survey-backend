@@ -9,6 +9,9 @@ INITIALIZATION
 7. to run node, script start
 8. To check, use postman, insomnia or another api testing tool
 //
+
+ROUTES AND ENDPOINTS
+//
 surveys post, creates surveys expects title and description, title is required
 endpoint: /surveys
 {
@@ -142,6 +145,8 @@ endpoint: /surveys/results/1
   ]
 }
 
+DESCRIPTION AND PRODUCTION
+//
 Description:
   To create survey, create name and description of survey using the post route of surveys. Then create questions for the survey via the questions post route and attach foreign key of matching survey. This should be done on the client side. Once survey is completed, to take survey, call survey get route and pass in specified id. Will return survey with questions that match survey id through the foreign key. The survey is taken and answers are submitted per question via the answers post route. To see the results of the survey call get route of surveys/results/"id" of survey. This will return all of the answers submitted.
 
