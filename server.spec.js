@@ -97,4 +97,24 @@ describe("server.js", () => {
       expect(response.status).toEqual(expected);
     });
   });
+  // endpoint answers
+  //
+  describe("answers endpoint (/answers)", () => {
+    // return status 201 created answer
+    test("should return status code 201", async () => {
+      const expected = 201;
+      const response = await request(server)
+        .post("/answers")
+        .send({ yes: 1, no: 0, questionsId: 1 });
+      expect(response.status).toEqual(expected);
+    });
+    // return status 400 when no questionsId
+    test("should return status code 400", async () => {
+      const expected = 400;
+      const response = await request(server)
+        .post("/answers")
+        .send({ yes: 0, no: 1, questionsId: "" });
+      expect(response.status).toEqual(expected);
+    });
+  });
 });
