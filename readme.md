@@ -13,8 +13,8 @@
 //
 
 ## Routes and Endpoints
-//
-surveys post, creates surveys expects title and description, title is required
+
+Surveys post, creates surveys expects title and description, title is required <br/>
 endpoint: /surveys
 ```
 {
@@ -23,7 +23,7 @@ endpoint: /surveys
 }
 ```
 
-get surveys/:id, retreives a survey by id,
+Get surveys by id, retreives a survey by id, used to take a survey <br/>
 endpoint: /surveys/1
 ```
 {
@@ -49,7 +49,7 @@ endpoint: /surveys/1
   ]
 }
 ```
-questions post, creates question, must provide question string and existing surveys id to attach to survey
+Questions post, creates question, must provide question string and existing surveys id to attach to survey <br/>
 endpoint: /questions
 ```
 {
@@ -57,8 +57,8 @@ endpoint: /questions
   "surveysId" : 1
 }
 ```
-answers post, creates answer, must provide existing questions id to attach to question,
-only possible input can be either 1 or 0, and only one field can be modified
+Answers post, creates answer to submit, must provide existing questions id to attach to question,
+only possible input can be either 1 or 0, and only one field can be modified <br/>
 endpoint : /answers
 ```
 {
@@ -67,7 +67,7 @@ endpoint : /answers
   questionsId: 1
 }
 ```
-survey results by id, must provide existing id,
+Survey results by id, must provide existing id, to check results of a survey <br/>
 endpoint: /surveys/results/1
 ```
 {
@@ -154,7 +154,6 @@ endpoint: /surveys/results/1
 }
 ```
 ## DESCRIPTION AND PRODUCTION
-//
 Description:
   To create survey, create name and description of survey using the post route of surveys. Then create questions for the survey via the questions post route and attach foreign key of matching survey. This should be done on the client side. Once survey is completed, to take survey, call survey get route and pass in specified id. Will return survey with questions that match survey id through the foreign key. The survey is taken and answers are submitted per question via the answers post route. To see the results of the survey call get route of surveys/results/"id" of survey. This will return all of the answers submitted.
 
