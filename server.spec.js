@@ -109,7 +109,7 @@ describe("server.js", () => {
         .send({ question: "", surveysId: 2 });
       expect(response.status).toEqual(expected);
     });
-    // should return status 400 when no surveysId is given
+    // should return status 400 when no question Id is given
     test("should return status code 400", async () => {
       const expected = 400;
       const response = await request(server)
@@ -117,6 +117,18 @@ describe("server.js", () => {
         .send({ question: "testQuestion1", surveysId: "" });
       expect(response.status).toEqual(expected);
     });
+  });
+  // return status 200, ok
+  test("should return status code 200", async () => {
+    const expected = 200;
+    const response = await request(server).get("/questions/1");
+    expect(response.status).toEqual(expected);
+  });
+  // return status 404 when no id exists
+  test("should return status code 404", async () => {
+    const expected = 404;
+    const response = await request(server).get("/questions/100");
+    expect(response.status).toEqual(expected);
   });
   // endpoint answers
   //

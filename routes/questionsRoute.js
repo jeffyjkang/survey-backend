@@ -19,7 +19,7 @@ router.get("/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const question = await questionsDb.get(id);
-    if (!question) {
+    if (!question.id) {
       res
         .status(404)
         .json({ error: "the question with the specified id does not exist" });
